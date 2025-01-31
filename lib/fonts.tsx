@@ -98,8 +98,8 @@ export const FONTS: Font[] = [
   {
     name: 'دوران',
     previewText: 'الخط العربي هو فن وأسلوب كتابة الحروف العربية',
-    simpleParagraph: 'الخط العربي هو فن وتقنية تنظيم الحروف لجعل اللغة المكتوبة مقروءة وجذابة',
-    category: 'خط كوفي',
+    simpleParagraph: 'الخط العربي هو فن وتقنية تنظيم الحروف لجعل اللغة المكتوبة مقروءة وجذابة عند عرضها. يتضمن تنظيم الخط اختيار أنماط الخطوط وأحجام النقاط وأطوال الأسطر والمسافات بين الأسطر والحروف وضبط المسافة بين أزواج الحروف. يعتبر الخط العربي من أجمل الخطوط في العالم، حيث يتميز بمرونته وقابليته للتشكيل بأساليب متعددة.',
+    category: 'Display',
     language: 'Arabic',
     websiteUrl: 'https://www.fontshare.com/fonts/doran',
     styles: [
@@ -132,22 +132,22 @@ export const FONTS: Font[] = [
 
 // Optional: Export font categories for filtering
 export const FONT_CATEGORIES = [
-  'خط كوفي',
-  'خط نسخ',
-  'خط ثلث',
-  'خط رقعة',
-  'خط ديواني',
-  'خط حر'
-];
-
-export const FONT_WEIGHTS = {
-  100: 'رفيع جداً',
-  200: 'رفيع إضافي',
-  300: 'رفيع',
-  400: 'عادي',
-  500: 'متوسط',
-  600: 'شبه ثقيل',
-  700: 'ثقيل',
-  800: 'ثقيل إضافي',
-  900: 'أسود'
-};
+    'Sans Serif',
+    'Serif',
+    'Display',
+    'Monospace',
+    'Handwriting',
+    'Script'
+  ];
+  
+  export const FONT_WEIGHTS = [
+    100, // Thin
+    200, // Extra Light
+    300, // Light
+    400, // Regular
+    500, // Medium
+    600, // Semi Bold
+    700, // Bold
+    800, // Extra Bold
+    900  // Black
+  ];
