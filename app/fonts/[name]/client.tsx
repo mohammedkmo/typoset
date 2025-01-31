@@ -12,6 +12,8 @@ export default function FontPageClient({ params }: { params: Promise<{ name: str
     const [selectedWeight, setSelectedWeight] = useState<number>(400);
     const [selectedStyle, setSelectedStyle] = useState<'normal' | 'italic'>('normal');
     const [fontSize, setFontSize] = useState(18);
+    const [loadingProgress, setLoadingProgress] = useState(0);
+
  
     const { name: fontName } = use(params);
     const font = FONTS.find(f => f.name === decodeURIComponent(fontName));
@@ -47,6 +49,7 @@ export default function FontPageClient({ params }: { params: Promise<{ name: str
                     await fontFace.load();
                     document.fonts.add(fontFace);
                     setLoadedStyles(prev => new Set(prev).add(`${style.weight}-${style.style}`));
+                    setLoadingProgress(prev => prev + (100 / styles.length));
                 } catch (err) {
                     console.error(`Failed to load font ${name}:`, err);
                 }
@@ -56,6 +59,46 @@ export default function FontPageClient({ params }: { params: Promise<{ name: str
 
     const isStyleLoaded = (style: FontStyle) =>
         loadedStyles.has(`${style.weight}-${style.style}`);
+
+    if (loadingProgress < 100) {
+        return (
+            <div className="min-h-screen">
+                <div className="container px-4 md:px-6">
+                    <div className="animate-pulse">
+                        <div className="mb-8 md:mb-12 bg-card p-4 md:p-8 rounded-lg">
+                            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+                                <div>
+                                    <div className="h-16 md:h-24 bg-white/10 rounded-lg w-3/4 mb-2"></div>
+                                    <div className="h-4 bg-white/10 rounded w-24"></div>
+                                </div>
+                                <div className="h-4 bg-white/10 rounded w-20"></div>
+                            </div>
+                            <div className="h-8 bg-white/10 rounded w-full mb-4"></div>
+                            <div className="h-24 bg-white/10 rounded w-full"></div>
+                        </div>
+
+                        <div className="mb-8 md:mb-16">
+                            <div className="h-8 bg-white/10 rounded w-48 mb-4"></div>
+                            <div className="space-y-4">
+                                {[1, 2, 3].map((i) => (
+                                    <div key={i} className="h-6 bg-white/10 rounded w-full"></div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="space-y-8">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="space-y-2">
+                                    <div className="h-4 bg-white/10 rounded w-24"></div>
+                                    <div className="h-6 bg-white/10 rounded w-full"></div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen">

@@ -8,12 +8,16 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
+  
+
   const filteredFonts = FONTS.filter(font => {
     const matchesCategory = !selectedCategory || font.category === selectedCategory;
     const matchesSearch = !searchQuery ||
       font.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  
 
   return (
     <div className="min-h-screen">

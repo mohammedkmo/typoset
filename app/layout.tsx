@@ -24,13 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" className="scroll-smooth">
       <body
         className={`${ibmPlexSansArabic.className} antialiased`}
       >
         <Header />
         {children}
         <Footer />
+        <div className="fixed inset-0 -z-10 bg-grid-white/5" />
       </body>
     </html>
   );
