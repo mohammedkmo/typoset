@@ -16,7 +16,7 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen p-6 md:p-8">
+    <div className="min-h-screen">
       <header className="text-center container mb-16">
 
         {/* Search Bar */}
