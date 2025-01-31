@@ -9,7 +9,6 @@ import { use } from 'react';
 
 export default function FontPageClient({ params }: { params: Promise<{ name: string }> }) {
     const [loadedStyles, setLoadedStyles] = useState<Set<string>>(new Set());
-    const [customText, setCustomText] = useState('اكتب شيئاً...');
     const [selectedWeight, setSelectedWeight] = useState<number>(400);
     const [selectedStyle, setSelectedStyle] = useState<'normal' | 'italic'>('normal');
     const [fontSize, setFontSize] = useState(18);
@@ -21,17 +20,19 @@ export default function FontPageClient({ params }: { params: Promise<{ name: str
         notFound();
     }
 
+    const [customText, setCustomText] = useState(font.previewText);
+
     const { name, previewText, category, styles, websiteUrl, language } = font;
     const regularStyle = styles.find(s => s.weight === 400) || styles[0];
     const boldStyle = styles.find(s => s.weight >= 700) || regularStyle;
     const isArabic = language === 'Arabic';
 
-    const availableWeights = Array.from(new Set(styles.map(s => s.weight))).sort((a, b) => a - b);
+    // const availableWeights = Array.from(new Set(styles.map(s => s.weight))).sort((a, b) => a - b);
     const hasItalic = styles.some(s => s.style === 'italic');
 
-    const selectedStyleExists = styles.some(
-        s => s.weight === selectedWeight && s.style === selectedStyle
-    );
+    // const selectedStyleExists = styles.some(
+    //     s => s.weight === selectedWeight && s.style === selectedStyle
+    // );
 
     useEffect(() => {
         Promise.all(
@@ -194,7 +195,7 @@ export default function FontPageClient({ params }: { params: Promise<{ name: str
 
                     <textarea
                         dir={isArabic ? 'rtl' : 'ltr'}
-                        value={font.previewText}
+                        value={customText}
                         onChange={(e) => setCustomText(e.target.value)}
                         placeholder="اكتب شيئاً..."
                         className="w-full bg-transparent outline-none ring-0 rounded-lg py-4 md:py-6 min-h-[150px] resize-none transition-all"
